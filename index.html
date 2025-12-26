@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首爾旅遊攻略 - 首頁</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>首爾旅遊攻略</h1>
+            <p>2026年1月7日 - 1月14日 | 8天7夜精彩行程</p>
+        </section>
+
+        <section class="quick-links" style="margin-bottom: 2rem; text-align: center;">
+            <h2>📋 行前準備</h2>
+            <p style="margin: 1.5rem 0; color: #666;">出發前必備物品與注意事項清單</p>
+            <a href="preparation.html" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.3s ease;">
+                查看完整行前準備清單 →
+            </a>
+        </section>
+
+        <section class="info-cards">
+            <div class="card">
+                <div class="card-icon">💱</div>
+                <h2>匯率資訊</h2>
+                <div class="exchange-rate">
+                    <p class="rate-label">1 韓元 (KRW) =</p>
+                    <p class="rate-value" id="krw-rate">載入中...</p>
+                    <p class="rate-label">新台幣 (TWD)</p>
+                    <p class="last-update">最後更新: <span id="rate-update"></span></p>
+                    <p class="reference" style="font-size: 0.7rem; color: #999; margin-top: 0.5rem;">資料來源：ExchangeRate-API</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌡️</div>
+                <h2>天氣資訊</h2>
+                <div class="weather-info">
+                    <p class="location">📍 首爾</p>
+                    <p class="temperature" id="temperature">載入中...</p>
+                    <p class="weather-desc" id="weather-desc">載入中...</p>
+                    <div class="tomorrow-weather" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;"><strong>明日預報：</strong></p>
+                        <p class="temperature" id="tomorrow-temp" style="font-size: 1.5rem; margin: 0.5rem 0;">載入中...</p>
+                        <p class="weather-desc" id="tomorrow-desc" style="font-size: 1rem; color: #666;">載入中...</p>
+                    </div>
+                    <p class="last-update">最後更新: <span id="weather-update"></span></p>
+                    <p class="reference" style="font-size: 0.7rem; color: #999; margin-top: 0.5rem;">資料來源：OpenWeatherMap</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🕐</div>
+                <h2>時間資訊</h2>
+                <div class="time-info">
+                    <div class="time-display">
+                        <p class="time-label">🇰🇷 首爾時間</p>
+                        <p class="time-value" id="seoul-time">載入中...</p>
+                    </div>
+                    <div class="time-display">
+                        <p class="time-label">🇹🇼 台灣時間</p>
+                        <p class="time-value" id="taiwan-time">載入中...</p>
+                    </div>
+                    <p class="time-note">時差：首爾比台灣快 1 小時</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h2>現金資訊</h2>
+                <div class="cash-info">
+                    <p><strong>貨幣：</strong>韓元 (KRW, ₩)</p>
+                    <p><strong>建議攜帶：</strong></p>
+                    <ul>
+                        <li>現金：每日約 50,000-100,000 韓元</li>
+                        <li>信用卡：大部分商店接受</li>
+                        <li>換匯地點：機場、銀行、換錢所</li>
+                    </ul>
+                    <p class="cash-tip">💡 機場匯率較差，建議在市區換錢所兌換</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🚇</div>
+                <h2>交通資訊</h2>
+                <div class="transport-info">
+                    <p><strong>推薦交通卡：</strong></p>
+                    <ul>
+                        <li>T-money 卡</li>
+                        <li>M-Pass 卡（觀光客專用）</li>
+                    </ul>
+                    <p><strong>地鐵：</strong>首爾地鐵系統發達，可到達大部分景點</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h2>實用應用程式</h2>
+                <div class="app-info">
+                    <ul>
+                        <li>Naver Map / Kakao Map（地圖導航）</li>
+                        <li>Papago（翻譯軟體）</li>
+                        <li>Kakao T（計程車）</li>
+                        <li>Seoul Metro（地鐵路線）</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links" style="margin-bottom: 2rem;">
+            <h2>🗺️ 首爾地圖</h2>
+            <div id="map" style="height: 400px; width: 100%; border-radius: 10px; margin-top: 1rem;"></div>
+            <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                💡 地圖顯示主要景點位置，可點擊標記查看詳細資訊
+            </p>
+        </section>
+
+        <section class="quick-links">
+            <h2>📅 每日行程</h2>
+            <div class="day-grid">
+                <a href="day1.html" class="day-card">
+                    <h3>第一天</h3>
+                    <p>1/7 (三) - 抵達首爾</p>
+                </a>
+                <a href="day2.html" class="day-card">
+                    <h3>第二天</h3>
+                    <p>1/8 (四) - 明洞 & 南山塔</p>
+                </a>
+                <a href="day3.html" class="day-card">
+                    <h3>第三天</h3>
+                    <p>1/9 (五) - 景福宮 & 北村</p>
+                </a>
+                <a href="day4.html" class="day-card">
+                    <h3>第四天</h3>
+                    <p>1/10 (六) - 弘大 & 梨大</p>
+                </a>
+                <a href="day5.html" class="day-card">
+                    <h3>第五天</h3>
+                    <p>1/11 (日) - 東大門 & 清溪川</p>
+                </a>
+                <a href="day6.html" class="day-card">
+                    <h3>第六天</h3>
+                    <p>1/12 (一) - 江南 & 狎鷗亭</p>
+                </a>
+                <a href="day7.html" class="day-card">
+                    <h3>第七天</h3>
+                    <p>1/13 (二) - 仁寺洞 & 三清洞</p>
+                </a>
+                <a href="day8.html" class="day-card">
+                    <h3>第八天</h3>
+                    <p>1/14 (三) - 返程</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+
+    <!-- Leaflet 地圖庫 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script src="script.js"></script>
+    <script>
+        // 手機版選單切換
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            
+            // 點擊選單項目後關閉選單
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // 初始化地圖
+        const map = L.map('map').setView([37.5665, 126.9780], 12);
+
+        // 添加 OpenStreetMap 圖層
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // 飯店位置（紅色標記）
+        // 飯店 Google Maps 連結: https://maps.app.goo.gl/Pe3mSULyzJVVLm6w8
+        // 座標需要從 Google Maps 獲取，這裡使用首爾市中心作為預設位置
+        // 實際使用時請替換為正確的飯店座標
+        const hotelLocation = { 
+            name: '飯店', 
+            lat: 37.5665, 
+            lng: 126.9780, 
+            isHotel: true 
+        };
+        
+        // 創建紅色圖標用於飯店
+        const redIcon = L.divIcon({
+            className: 'hotel-marker',
+            html: '<div style="background-color: #FF0000; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 18px;">🏨</div>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+        
+        const hotelMarker = L.marker([hotelLocation.lat, hotelLocation.lng], { icon: redIcon }).addTo(map);
+        hotelMarker.bindPopup(`<b style="color: #FF0000;">🏨 ${hotelLocation.name}</b><br><a href="https://maps.app.goo.gl/Pe3mSULyzJVVLm6w8" target="_blank" style="color: #667eea;">在 Google Maps 查看 →</a>`);
+
+        // 主要景點標記（藍色）
+        const locations = [
+            { name: '景福宮', lat: 37.5796, lng: 126.9770, day: 'day2.html' },
+            { name: '北村韓屋村', lat: 37.5831, lng: 126.9820, day: 'day2.html' },
+            { name: '明洞', lat: 37.5636, lng: 126.9826, day: 'day2.html' },
+            { name: '南山首爾塔', lat: 37.5512, lng: 126.9882, day: 'day4.html' },
+            { name: '弘大商圈', lat: 37.5563, lng: 126.9239, day: 'day3.html' },
+            { name: '樂天百貨（蠶室）', lat: 37.5125, lng: 127.1025, day: 'day4.html' },
+            { name: '廣藏市場', lat: 37.5700, lng: 126.9929, day: 'day6.html' },
+            { name: 'STARFIELD Library', lat: 37.5125, lng: 127.0590, day: 'day6.html' },
+            { name: '仁寺洞', lat: 37.5735, lng: 126.9828, day: 'day7.html' },
+            { name: '三清洞', lat: 37.5831, lng: 126.9820, day: 'day7.html' }
+        ];
+
+        locations.forEach(loc => {
+            const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+            marker.bindPopup(`<b>${loc.name}</b><br><a href="${loc.day}" style="color: #667eea;">查看行程 →</a>`);
+        });
+    </script>
+</body>
+</html>
+

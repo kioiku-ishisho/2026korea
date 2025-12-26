@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html" class="active">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第三天 - 弘大商圈・咖啡廳</h1>
+            <p class="date">2026年1月9日 (星期五)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>弘大商圈</h3>
+                    <p>前往弘大商圈，逛街、看街頭表演、文創小店，感受首爾最年輕活力的區域。</p>
+                    <p class="location">📍 弘大商圈 (Hongdae Shopping Street)</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">中午</div>
+                <div class="activity">
+                    <h3>早午餐或咖啡廳</h3>
+                    <p>安排早午餐或咖啡廳，例如 The Flying Pan Blue、Bread Lab，享受悠閒時光。</p>
+                    <p class="location">📍 The Flying Pan Blue / Bread Lab</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>咖啡廳與休息時間</h3>
+                    <p>留給咖啡廳與休息時間，可在 Fritz Coffee、Anthracite 或 The Famous Lamb 之間選擇，適合數位游牧、拍照。</p>
+                    <p class="location">📍 Fritz Coffee / Anthracite / The Famous Lamb</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">傍晚</div>
+                <div class="activity">
+                    <h3>河邊散步或 VR 體驗</h3>
+                    <p>可到附近河邊散步或體驗 VR 空間，享受首爾的現代科技與自然風光。</p>
+                    <p class="location">📍 漢江邊 / VR 體驗空間</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">晚上</div>
+                <div class="activity">
+                    <h3>弘大夜市</h3>
+                    <p>回到弘大夜市吃小吃與甜點，體驗首爾年輕文化的夜生活。</p>
+                    <p class="location">📍 弘大夜市</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>咖啡廳與購物建議</h4>
+                <ul>
+                    <li>弘大商圈價格較親民，適合購買平價商品</li>
+                    <li>弘大有很多街頭表演，晚上特別熱鬧</li>
+                    <li>咖啡廳推薦：Fritz Coffee、Anthracite、The Famous Lamb</li>
+                    <li>VR 體驗空間適合科技愛好者</li>
+                    <li>弘大夜市小吃種類豐富，記得留肚子</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第六天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html" class="active">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第六天 - 市場・書店・設計與科技</h1>
+            <p class="date">2026年1月12日 (星期一)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>南大門市場或廣藏市場</h3>
+                    <p>前往南大門市場或廣藏市場，吃道地小吃，找鍋巴、椪糖、魚形甜餅，也可以買水果。</p>
+                    <p class="location">📍 南大門市場 (Namdaemun Market) / 廣藏市場 (Gwangjang Market)</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">中午</div>
+                <div class="activity">
+                    <h3>市場午餐</h3>
+                    <p>繼續在市場用餐，辣與不辣都好選。</p>
+                    <p class="location">📍 市場內餐廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>STARFIELD Library、首爾市立圖書館或 D Museum</h3>
+                    <p>前往 STARFIELD Library、首爾市立圖書館或 D Museum，看設計、書籍與科技展覽。</p>
+                    <p class="location">📍 STARFIELD Library / 首爾市立圖書館 / D Museum</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>咖啡廳時間</h3>
+                    <p>接著再安排一段咖啡廳時間，作為休息與拍照。</p>
+                    <p class="location">📍 咖啡廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">晚上</div>
+                <div class="activity">
+                    <h3>明洞或弘大散步</h3>
+                    <p>可回明洞或弘大散步。</p>
+                    <p class="location">📍 明洞 / 弘大</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>市場與文化建議</h4>
+                <ul>
+                    <li>市場小吃推薦：鍋巴、椪糖、魚形甜餅</li>
+                    <li>市場可以買到新鮮水果</li>
+                    <li>STARFIELD Library 是拍照熱點</li>
+                    <li>D Museum 有設計與科技展覽</li>
+                    <li>咖啡廳適合數位游牧和休息</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

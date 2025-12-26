@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html" class="active">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第一天 - 抵達首爾</h1>
+            <p class="date">2026年1月7日 (星期三)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">15:45</div>
+                <div class="activity">
+                    <h3>從台北松山機場出發</h3>
+                    <p>前往台北松山機場，辦理登機手續，準備出發前往首爾。</p>
+                    <p class="location">📍 台北松山機場 (TSA) | 航班時間：15:45 起飛</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">19:15</div>
+                <div class="activity">
+                    <h3>抵達金浦機場</h3>
+                    <p>抵達首爾金浦機場，辦理入境手續，領取行李。建議在機場購買 T-money 交通卡。</p>
+                    <p class="location">📍 金浦機場 (GMP) | 抵達時間：19:15</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">晚上</div>
+                <div class="activity">
+                    <h3>前往市區飯店辦理入住</h3>
+                    <p>從金浦機場前往市區飯店，辦理入住手續，放置行李，稍作休息。</p>
+                    <p class="location">📍 預訂飯店</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">晚上</div>
+                <div class="activity">
+                    <h3>簡單晚餐與休息</h3>
+                    <p>晚上不安排行程，建議在飯店附近簡單吃晚餐，或到便利商店、超市買草莓、梨子、葡萄當宵夜。早點休息適應天氣與時差。</p>
+                    <p class="location">📍 飯店附近 / 便利商店 / 超市</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>抵達日注意事項</h4>
+                <ul>
+                    <li>記得購買 T-money 交通卡，方便後續行程</li>
+                    <li>下載實用 APP：Naver Map、Papago 翻譯、Kakao T</li>
+                    <li>確認飯店 WiFi 連線，下載離線地圖</li>
+                    <li>1月首爾較冷，注意保暖</li>
+                    <li>早點休息，適應時差（首爾比台灣快1小時）</li>
+                    <li>便利商店和超市有新鮮水果，可以買來當宵夜</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        // 手機版選單切換
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

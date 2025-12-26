@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html" class="active">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第二天 - 景福宮・北村・明洞</h1>
+            <p class="date">2026年1月8日 (星期四)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>景福宮參觀</h3>
+                    <p>前往景福宮參觀，建議穿保暖男裝外套、帽子與手套，拍照也方便。可觀看守門將換崗儀式。</p>
+                    <p class="location">📍 景福宮 (Gyeongbokgung Palace)</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>北村韓屋街與三清洞散步</h3>
+                    <p>從景福宮步行到北村韓屋街與三清洞一帶散步，感受傳統街區氣氛，欣賞600年歷史的傳統建築。</p>
+                    <p class="location">📍 北村韓屋村 (Bukchon Hanok Village) / 三清洞 (Samcheong-dong)</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">中午</div>
+                <div class="activity">
+                    <h3>午餐</h3>
+                    <p>可到附近市場或小餐館用餐，選擇不辣或辣的韓式料理，推薦：參雞湯、韓式定食。</p>
+                    <p class="location">📍 北村/三清洞附近餐廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>咖啡廳時間</h3>
+                    <p>安排咖啡廳時間，可在 Cafe Onion、Stylenanda 或 C.Through 之間依心情選一家休息拍照，享受文藝氛圍。</p>
+                    <p class="location">📍 Cafe Onion / Stylenanda / C.Through</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">傍晚/晚上</div>
+                <div class="activity">
+                    <h3>明洞逛街</h3>
+                    <p>前往明洞逛街，吃水果甜點、Hotteok（糖餅）、椪糖等小點心，體驗首爾最熱鬧的購物區。</p>
+                    <p class="location">📍 明洞 (Myeongdong)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>文化體驗與購物建議</h4>
+                <ul>
+                    <li>景福宮穿韓服入場可免費，建議提前預約韓服租借</li>
+                    <li>1月首爾較冷，務必穿保暖外套、帽子與手套</li>
+                    <li>北村韓屋村是住宅區，請保持安靜，尊重當地居民</li>
+                    <li>三清洞有很多特色咖啡廳，適合休息拍照</li>
+                    <li>明洞小吃推薦：Hotteok、椪糖、水果甜點</li>
+                    <li>明洞購物記得比價，部分店家可退稅</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

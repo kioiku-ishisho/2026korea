@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第四天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html" class="active">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第四天 - 南山首爾塔・樂天</h1>
+            <p class="date">2026年1月10日 (星期六)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>南山首爾塔</h3>
+                    <p>前往南山首爾塔，搭纜車或公園巴士上山，欣賞首爾市景與拍照。</p>
+                    <p class="location">📍 南山首爾塔 (N Seoul Tower)</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">中午</div>
+                <div class="activity">
+                    <h3>午餐</h3>
+                    <p>在南山附近簡單用餐或咖啡廳休息。</p>
+                    <p class="location">📍 南山附近餐廳/咖啡廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>樂天百貨與樂天超市</h3>
+                    <p>前往蠶室一帶的樂天百貨與樂天超市，採買水果、零食與伴手禮。</p>
+                    <p class="location">📍 樂天百貨 (Lotte Department Store) / 樂天超市 (Lotte Mart) - 蠶室</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">晚上</div>
+                <div class="activity">
+                    <h3>晚餐</h3>
+                    <p>回飯店附近吃晚餐，行程保持輕鬆。</p>
+                    <p class="location">📍 飯店附近餐廳</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>觀光與購物建議</h4>
+                <ul>
+                    <li>南山纜車建議提前購票，避免排隊</li>
+                    <li>南山塔門票可現場購買或線上預訂</li>
+                    <li>樂天超市是採買伴手禮的好地方</li>
+                    <li>記得比價，部分商品可退稅</li>
+                    <li>行程保持輕鬆，不要安排太緊湊</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

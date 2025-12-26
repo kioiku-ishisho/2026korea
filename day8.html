@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第八天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html" class="active">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第八天 - 回程</h1>
+            <p class="date">2026年1月14日 (星期三)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>整理行李與輕鬆散步</h3>
+                    <p>整理行李，附近輕鬆散步或找咖啡廳吃早午餐。</p>
+                    <p class="location">📍 飯店附近 / 咖啡廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>前往金浦機場</h3>
+                    <p>回飯店拿行李後前往金浦機場。建議提前3小時抵達機場。</p>
+                    <p class="location">📍 金浦機場 (Gimpo International Airport)</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>機場退稅與登機手續</h3>
+                    <p>在機場辦理退稅手續（如有），辦理登機手續，托運行李，通過安檢和出境檢查。</p>
+                    <p class="location">📍 金浦機場</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">20:15</div>
+                <div class="activity">
+                    <h3>搭機返台</h3>
+                    <p>從金浦機場搭機返台，結束首爾之旅。</p>
+                    <p class="location">📍 金浦機場 (GMP) | 航班時間：20:15 起飛</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">22:00</div>
+                <div class="activity">
+                    <h3>抵達台北松山機場</h3>
+                    <p>抵達台北松山機場，領取行李，結束愉快的首爾之旅。</p>
+                    <p class="location">📍 台北松山機場 (TSA) | 抵達時間：22:00</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>返程注意事項</h4>
+                <ul>
+                    <li>建議提前3小時抵達機場，避免延誤</li>
+                    <li>確認航班時間和登機門</li>
+                    <li>記得辦理退稅，攜帶退稅單據和商品</li>
+                    <li>檢查行李重量，避免超重費用</li>
+                    <li>確認護照和機票是否齊全</li>
+                    <li>機場有免費WiFi，可隨時聯繫家人</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>🎉 感謝您的使用</h2>
+            <div style="text-align: center; padding: 2rem; background: #f0f0f0; border-radius: 10px;">
+                <p style="font-size: 1.2rem; color: #667eea; margin-bottom: 1rem;">
+                    希望這份旅遊指南對您的韓國之旅有所幫助！
+                </p>
+                <p style="color: #666;">
+                    祝您旅途平安，期待下次再訪韓國！🇰🇷
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

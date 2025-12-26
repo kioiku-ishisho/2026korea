@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第七天 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html" class="active">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>第七天 - 海鮮・文化自由日</h1>
+            <p class="date">2026年1月13日 (星期二)</p>
+        </div>
+
+        <section class="schedule-section">
+            <h2>📅 詳細行程</h2>
+            
+            <div class="schedule-item">
+                <div class="time">上午</div>
+                <div class="activity">
+                    <h3>自由活動</h3>
+                    <p>自由活動，可重訪最喜歡的咖啡廳或市場。</p>
+                    <p class="location">📍 自選地點</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">中午</div>
+                <div class="activity">
+                    <h3>海鮮料理</h3>
+                    <p>安排海鮮料理，例如鷺梁津魚市場或傳統海鮮餐廳。</p>
+                    <p class="location">📍 鷺梁津魚市場 (Noryangjin Fish Market) / 傳統海鮮餐廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">下午</div>
+                <div class="activity">
+                    <h3>文化或科技相關行程</h3>
+                    <p>可選擇文化或科技相關行程，如跆拳道博物館（黑帶朝聖）、VR 體驗或設計空間。</p>
+                    <p class="location">📍 跆拳道博物館 / VR 體驗 / 設計空間</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">傍晚</div>
+                <div class="activity">
+                    <h3>數位游牧友善咖啡廳</h3>
+                    <p>再到數位游牧友善咖啡廳久坐休息。</p>
+                    <p class="location">📍 咖啡廳</p>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">晚上</div>
+                <div class="activity">
+                    <h3>最後購物</h3>
+                    <p>前往明洞或樂天做最後購物。</p>
+                    <p class="location">📍 明洞 / 樂天</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 貼心提醒</h2>
+            <div class="tips-section">
+                <h4>自由日建議</h4>
+                <ul>
+                    <li>可重訪最喜歡的咖啡廳或市場</li>
+                    <li>鷺梁津魚市場可體驗新鮮海鮮</li>
+                    <li>跆拳道博物館適合黑帶朝聖</li>
+                    <li>VR 體驗適合科技愛好者</li>
+                    <li>記得確認退稅單據，可在機場辦理退稅</li>
+                    <li>整理行李時注意航空公司行李重量限制</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

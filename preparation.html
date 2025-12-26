@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行前準備 - 首爾旅遊攻略</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🇰🇷 首爾旅遊攻略</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="preparation.html" class="active">行前準備</a></li>
+                <li><a href="day1.html">第一天</a></li>
+                <li><a href="day2.html">第二天</a></li>
+                <li><a href="day3.html">第三天</a></li>
+                <li><a href="day4.html">第四天</a></li>
+                <li><a href="day5.html">第五天</a></li>
+                <li><a href="day6.html">第六天</a></li>
+                <li><a href="day7.html">第七天</a></li>
+                <li><a href="day8.html">第八天</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="day-header">
+            <h1>📋 行前準備清單</h1>
+            <p class="date">出發前必備物品與注意事項</p>
+        </div>
+
+        <section class="schedule-section">
+            <div class="preparation-list">
+                <div class="prep-category">
+                    <h3>📄 證件文件</h3>
+                    <ul>
+                        <li>✓ 護照（有效期6個月以上）</li>
+                        <li>✓ 機票確認單</li>
+                        <li>✓ 飯店預訂確認單</li>
+                        <li>✓ 旅遊保險單</li>
+                        <li>✓ 護照影本（備用）</li>
+                    </ul>
+                </div>
+                <div class="prep-category">
+                    <h3>💰 金錢相關</h3>
+                    <ul>
+                        <li>✓ 現金（台幣或美金，用於換匯）</li>
+                        <li>✓ 信用卡（Visa/Mastercard）</li>
+                        <li>✓ 提款卡（確認海外提款功能）</li>
+                        <li>✓ 零錢包（小額韓元）</li>
+                    </ul>
+                </div>
+                <div class="prep-category">
+                    <h3>📱 電子設備</h3>
+                    <ul>
+                        <li>✓ 手機及充電器</li>
+                        <li>✓ 行動電源</li>
+                        <li>✓ 轉接頭（韓國使用Type C/F，220V）</li>
+                        <li>✓ 相機（可選）</li>
+                        <li>✓ 耳機</li>
+                    </ul>
+                </div>
+                <div class="prep-category">
+                    <h3>👕 衣物用品</h3>
+                    <ul>
+                        <li>✓ 保暖衣物（1月首爾較冷，約-5°C~5°C）</li>
+                        <li>✓ 羽絨外套、圍巾、手套</li>
+                        <li>✓ 舒適的步行鞋</li>
+                        <li>✓ 換洗衣物</li>
+                        <li>✓ 個人衛生用品</li>
+                    </ul>
+                </div>
+                <div class="prep-category">
+                    <h3>💊 健康用品</h3>
+                    <ul>
+                        <li>✓ 個人常用藥品</li>
+                        <li>✓ 感冒藥、腸胃藥</li>
+                        <li>✓ 口罩</li>
+                        <li>✓ 濕紙巾、乾洗手</li>
+                    </ul>
+                </div>
+                <div class="prep-category">
+                    <h3>📲 手機應用程式</h3>
+                    <ul>
+                        <li>✓ Naver Map / Kakao Map（地圖）</li>
+                        <li>✓ Papago（翻譯軟體）</li>
+                        <li>✓ Kakao T（計程車）</li>
+                        <li>✓ Seoul Metro（地鐵）</li>
+                        <li>✓ 離線地圖（備用）</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>💡 重要提醒</h2>
+            <div class="tips-section">
+                <h4>出發前檢查事項</h4>
+                <ul>
+                    <li>確認護照有效期至少6個月以上</li>
+                    <li>確認機票和飯店預訂資訊</li>
+                    <li>購買旅遊保險</li>
+                    <li>確認手機國際漫遊或購買當地 SIM 卡</li>
+                    <li>下載必要的手機應用程式</li>
+                    <li>準備轉接頭（韓國使用Type C/F插頭）</li>
+                    <li>確認信用卡海外使用功能已開啟</li>
+                    <li>準備常用藥品和個人衛生用品</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
