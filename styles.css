@@ -458,6 +458,41 @@ footer {
     color: #666;
 }
 
+.footer-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #667eea;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #5568d3;
+}
+
+.instagram-link {
+    transition: color 0.3s ease;
+}
+
+.instagram-link:hover {
+    color: #E4405F !important;
+}
+
+.instagram-link:hover span:first-child {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
