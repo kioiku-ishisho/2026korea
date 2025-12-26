@@ -179,6 +179,14 @@ main {
     margin: 0.5rem 0;
 }
 
+#swap-rate-btn:hover {
+    background: #5568d3;
+}
+
+#swap-rate-btn:active {
+    background: #4457c1;
+}
+
 .rate-label {
     color: #666;
     font-size: 0.9rem;

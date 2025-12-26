@@ -51,9 +51,26 @@
                 <div class="card-icon">💱</div>
                 <h2>匯率資訊</h2>
                 <div class="exchange-rate">
-                    <p class="rate-label">1 韓元 (KRW) =</p>
-                    <p class="rate-value" id="krw-rate">載入中...</p>
-                    <p class="rate-label">新台幣 (TWD)</p>
+                    <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e0e0e0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <p class="rate-label" style="margin: 0; font-size: 0.9rem;"><strong id="usd-rate-display-label">1 美元 (USD) =</strong></p>
+                            <button id="swap-usd-krw-btn" style="background: #667eea; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s;">
+                                🔄 切換
+                            </button>
+                        </div>
+                        <p class="rate-value" id="usd-krw-rate" style="font-size: 1.5rem; color: #667eea; margin: 0.5rem 0;">載入中...</p>
+                        <p class="rate-label" id="usd-rate-target-label" style="font-size: 0.9rem;">韓元 (KRW)</p>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <p class="rate-label" style="margin: 0;"><strong id="rate-display-label">1 新台幣 (TWD) =</strong></p>
+                            <button id="swap-rate-btn" style="background: #667eea; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s;">
+                                🔄 切換
+                            </button>
+                        </div>
+                        <p class="rate-value" id="krw-rate">載入中...</p>
+                        <p class="rate-label" id="rate-target-label">韓元 (KRW)</p>
+                    </div>
                     <p class="last-update">最後更新: <span id="rate-update"></span></p>
                     <p class="reference" style="font-size: 0.7rem; color: #999; margin-top: 0.5rem;">資料來源：ExchangeRate-API</p>
                 </div>
@@ -66,6 +83,7 @@
                     <p class="location">📍 首爾</p>
                     <p class="temperature" id="temperature">載入中...</p>
                     <p class="weather-desc" id="weather-desc">載入中...</p>
+                    <p class="temperature-range" id="today-range" style="font-size: 1rem; color: #666; margin-top: 0.5rem;">載入中...</p>
                     <div class="tomorrow-weather" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
                         <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;"><strong>明日預報：</strong></p>
                         <p class="temperature" id="tomorrow-temp" style="font-size: 1.5rem; margin: 0.5rem 0;">載入中...</p>
@@ -136,9 +154,15 @@
 
         <section class="quick-links" style="margin-bottom: 2rem;">
             <h2>🗺️ 首爾地圖</h2>
-            <div id="map" style="height: 400px; width: 100%; border-radius: 10px; margin-top: 1rem;"></div>
+            <div id="map" style="height: 450px; width: 100%; border-radius: 10px; margin-top: 1rem;"></div>
             <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
-                💡 地圖顯示主要景點位置，可點擊標記查看詳細資訊
+                💡 地圖顯示主要景點位置，可點擊標記查看詳細資訊<br>
+                <span style="font-size: 0.8rem; color: #999;">
+                    ✈️ 藍色飛機 = 金浦機場 | 🏨 紅色 = 飯店 | 📍 綠色 = 您的位置 | 藍色標記 = 景點
+                </span><br>
+                <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;">
+                    地圖由 OpenStreetMap 提供（繁體中文介面）
+                </span>
             </p>
         </section>
 
@@ -182,10 +206,10 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 首爾旅遊攻略 | 祝您旅途愉快！</p>
+        <p>&copy; 2026 首爾旅遊攻略 | 祝您旅途愉快！</p>
     </footer>
 
-    <!-- Leaflet 地圖庫 -->
+    <!-- Leaflet 地圖庫（OpenStreetMap） -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
@@ -209,27 +233,26 @@
             });
         }
 
-        // 初始化地圖
-        const map = L.map('map').setView([37.5665, 126.9780], 12);
+        // 初始化 OpenStreetMap 地圖（中文版）
+        const map = L.map('map', {
+            zoomControl: true,
+            attributionControl: true
+        }).setView([37.5665, 126.9780], 12);
 
-        // 添加 OpenStreetMap 圖層
+        // 添加中文 OpenStreetMap 圖層
+        // 使用 OpenStreetMap 的中文圖層
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 19
         }).addTo(map);
 
         // 飯店位置（紅色標記）
-        // 飯店 Google Maps 連結: https://maps.app.goo.gl/Pe3mSULyzJVVLm6w8
-        // 座標需要從 Google Maps 獲取，這裡使用首爾市中心作為預設位置
-        // 實際使用時請替換為正確的飯店座標
         const hotelLocation = { 
             name: '飯店', 
             lat: 37.5665, 
-            lng: 126.9780, 
-            isHotel: true 
+            lng: 126.9780
         };
         
-        // 創建紅色圖標用於飯店
         const redIcon = L.divIcon({
             className: 'hotel-marker',
             html: '<div style="background-color: #FF0000; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 18px;">🏨</div>',
@@ -239,6 +262,23 @@
         
         const hotelMarker = L.marker([hotelLocation.lat, hotelLocation.lng], { icon: redIcon }).addTo(map);
         hotelMarker.bindPopup(`<b style="color: #FF0000;">🏨 ${hotelLocation.name}</b><br><a href="https://maps.app.goo.gl/Pe3mSULyzJVVLm6w8" target="_blank" style="color: #667eea;">在 Google Maps 查看 →</a>`);
+
+        // 金浦機場（飛機圖標）
+        const gimpoAirport = {
+            name: '金浦機場 (GMP)',
+            lat: 37.5583,
+            lng: 126.7906
+        };
+        
+        const airplaneIcon = L.divIcon({
+            className: 'airport-marker',
+            html: '<div style="background-color: #0066CC; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">✈️</div>',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+        
+        const airportMarker = L.marker([gimpoAirport.lat, gimpoAirport.lng], { icon: airplaneIcon }).addTo(map);
+        airportMarker.bindPopup(`<b style="color: #0066CC;">✈️ ${gimpoAirport.name}</b><br>首爾主要機場<br><a href="https://www.airport.co.kr/gimpo/main.do" target="_blank" style="color: #667eea;">官方網站 →</a>`);
 
         // 主要景點標記（藍色）
         const locations = [
@@ -258,6 +298,45 @@
             const marker = L.marker([loc.lat, loc.lng]).addTo(map);
             marker.bindPopup(`<b>${loc.name}</b><br><a href="${loc.day}" style="color: #667eea;">查看行程 →</a>`);
         });
+
+        // 獲取用戶當前位置
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    
+                    const userIcon = L.divIcon({
+                        className: 'user-location-marker',
+                        html: '<div style="background-color: #4CAF50; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px;">📍</div>',
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 12]
+                    });
+                    
+                    const userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map);
+                    userMarker.bindPopup(`<b style="color: #4CAF50;">📍 您的位置</b><br>緯度: ${userLat.toFixed(6)}<br>經度: ${userLng.toFixed(6)}`);
+                    
+                    // 如果距離首爾很遠，調整地圖視角
+                    const distance = Math.sqrt(
+                        Math.pow(userLat - 37.5665, 2) + Math.pow(userLng - 126.9780, 2)
+                    );
+                    if (distance > 0.5) {
+                        const bounds = L.latLngBounds(
+                            [[userLat, userLng], [37.5665, 126.9780]]
+                        );
+                        map.fitBounds(bounds, { padding: [50, 50] });
+                    }
+                },
+                function(error) {
+                    console.log('無法獲取位置:', error.message);
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        }
     </script>
 </body>
 </html>

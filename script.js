@@ -3,6 +3,17 @@
 // 1. 前往 https://www.exchangerate-api.com/ 註冊免費帳號
 // 2. 登入後在 Dashboard 取得您的 API key
 // 3. 將下面的 YOUR_EXCHANGE_RATE_API_KEY 替換為您的 API key
+
+let exchangeRates = {
+    usdToKrw: null,
+    krwToUsd: null,
+    twdToKrw: null,
+    krwToTwd: null
+};
+
+let currentRateMode = 'twd-krw'; // 'twd-krw' 或 'krw-twd'
+let currentUsdKrwMode = 'usd-krw'; // 'usd-krw' 或 'krw-usd'
+
 async function fetchExchangeRate() {
     try {
         const apiKey = '3f4dad549c5add47df56ed91'; // ExchangeRate-API key
@@ -15,8 +26,15 @@ async function fetchExchangeRate() {
             const usdToTwd = data.rates.TWD;
             const usdToKrw = data.rates.KRW;
             const twdToKrw = (usdToKrw / usdToTwd).toFixed(6);
+            const krwToTwd = (usdToTwd / usdToKrw).toFixed(6);
             
-            document.getElementById('krw-rate').textContent = twdToKrw + ' (免費API)';
+            exchangeRates.usdToKrw = usdToKrw.toFixed(2);
+            exchangeRates.krwToUsd = (1 / usdToKrw).toFixed(6);
+            exchangeRates.twdToKrw = twdToKrw;
+            exchangeRates.krwToTwd = krwToTwd;
+            
+            updateRateDisplay();
+            updateUsdKrwDisplay();
             document.getElementById('rate-update').textContent = new Date().toLocaleString('zh-TW');
         } else {
             // 使用 ExchangeRate-API（需要 API key，更準確）
@@ -27,8 +45,15 @@ async function fetchExchangeRate() {
                 const usdToTwd = data.conversion_rates.TWD;
                 const usdToKrw = data.conversion_rates.KRW;
                 const twdToKrw = (usdToKrw / usdToTwd).toFixed(6);
+                const krwToTwd = (usdToTwd / usdToKrw).toFixed(6);
                 
-                document.getElementById('krw-rate').textContent = twdToKrw;
+                exchangeRates.usdToKrw = usdToKrw.toFixed(2);
+                exchangeRates.krwToUsd = (1 / usdToKrw).toFixed(6);
+                exchangeRates.twdToKrw = twdToKrw;
+                exchangeRates.krwToTwd = krwToTwd;
+                
+                updateRateDisplay();
+                updateUsdKrwDisplay();
                 document.getElementById('rate-update').textContent = new Date().toLocaleString('zh-TW');
             } else {
                 throw new Error('API 回應錯誤');
@@ -37,9 +62,69 @@ async function fetchExchangeRate() {
     } catch (error) {
         console.error('匯率載入失敗:', error);
         // 如果 API 失敗，使用模擬資料
-        const mockRate = (1 / 42.5).toFixed(6);
-        document.getElementById('krw-rate').textContent = mockRate + ' (模擬)';
+        exchangeRates.usdToKrw = '1350.00';
+        exchangeRates.krwToUsd = (1 / 1350).toFixed(6);
+        exchangeRates.twdToKrw = (1 / 42.5).toFixed(6);
+        exchangeRates.krwToTwd = (42.5).toFixed(6);
+        
+        updateRateDisplay();
+        updateUsdKrwDisplay();
         document.getElementById('rate-update').textContent = new Date().toLocaleString('zh-TW');
+    }
+}
+
+function updateRateDisplay() {
+    const rateValueEl = document.getElementById('krw-rate');
+    const rateLabelEl = document.getElementById('rate-display-label');
+    const targetLabelEl = document.getElementById('rate-target-label');
+    
+    if (currentRateMode === 'twd-krw') {
+        // 顯示：1 TWD = ? KRW
+        rateLabelEl.textContent = '1 新台幣 (TWD) =';
+        rateValueEl.textContent = exchangeRates.twdToKrw;
+        targetLabelEl.textContent = '韓元 (KRW)';
+    } else {
+        // 顯示：1 KRW = ? TWD
+        rateLabelEl.textContent = '1 韓元 (KRW) =';
+        rateValueEl.textContent = exchangeRates.krwToTwd;
+        targetLabelEl.textContent = '新台幣 (TWD)';
+    }
+}
+
+function updateUsdKrwDisplay() {
+    const usdKrwRateEl = document.getElementById('usd-krw-rate');
+    const usdRateLabelEl = document.getElementById('usd-rate-display-label');
+    const usdTargetLabelEl = document.getElementById('usd-rate-target-label');
+    
+    if (currentUsdKrwMode === 'usd-krw') {
+        // 顯示：1 USD = ? KRW
+        usdRateLabelEl.textContent = '1 美元 (USD) =';
+        usdKrwRateEl.textContent = exchangeRates.usdToKrw;
+        usdTargetLabelEl.textContent = '韓元 (KRW)';
+    } else {
+        // 顯示：1 KRW = ? USD
+        usdRateLabelEl.textContent = '1 韓元 (KRW) =';
+        usdKrwRateEl.textContent = exchangeRates.krwToUsd;
+        usdTargetLabelEl.textContent = '美元 (USD)';
+    }
+}
+
+// 切換匯率顯示
+function setupRateSwapButton() {
+    const swapBtn = document.getElementById('swap-rate-btn');
+    if (swapBtn) {
+        swapBtn.addEventListener('click', function() {
+            currentRateMode = currentRateMode === 'twd-krw' ? 'krw-twd' : 'twd-krw';
+            updateRateDisplay();
+        });
+    }
+    
+    const swapUsdKrwBtn = document.getElementById('swap-usd-krw-btn');
+    if (swapUsdKrwBtn) {
+        swapUsdKrwBtn.addEventListener('click', function() {
+            currentUsdKrwMode = currentUsdKrwMode === 'usd-krw' ? 'krw-usd' : 'usd-krw';
+            updateUsdKrwDisplay();
+        });
     }
 }
 
@@ -64,36 +149,78 @@ async function fetchWeather() {
         
         const todayData = await todayResponse.json();
         const temp = Math.round(todayData.main.temp);
+        const tempMin = Math.round(todayData.main.temp_min);
+        const tempMax = Math.round(todayData.main.temp_max);
         const desc = todayData.weather[0].description;
         
         document.getElementById('temperature').textContent = `${temp}°C`;
         document.getElementById('weather-desc').textContent = desc;
+        
+        // 顯示今日溫度範圍
+        const todayRangeEl = document.getElementById('today-range');
+        if (todayRangeEl) {
+            todayRangeEl.textContent = `今日溫度：${tempMin}°C ~ ${tempMax}°C`;
+        }
+        
         document.getElementById('weather-update').textContent = new Date().toLocaleString('zh-TW');
         
         // 取得明日天氣預報
         try {
             const forecastResponse = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw&cnt=8`
+                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw&cnt=40`
             );
             
             if (forecastResponse.ok) {
                 const forecastData = await forecastResponse.json();
-                // 取得明日（約24小時後）的天氣
-                // 通常第一個預報是3小時後，我們取第8個（約24小時後）
-                const tomorrowForecast = forecastData.list[7] || forecastData.list[forecastData.list.length - 1];
-                if (tomorrowForecast) {
-                    const tomorrowTemp = Math.round(tomorrowForecast.main.temp);
-                    const tomorrowDesc = tomorrowForecast.weather[0].description;
-                    
-                    const tomorrowTempEl = document.getElementById('tomorrow-temp');
-                    const tomorrowDescEl = document.getElementById('tomorrow-desc');
-                    
-                    if (tomorrowTempEl) {
-                        tomorrowTempEl.textContent = `${tomorrowTemp}°C`;
+                
+                // 計算明日的最高和最低溫度
+                // 獲取明天0點到23:59的所有預報數據
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                
+                const tomorrowEnd = new Date(tomorrow);
+                tomorrowEnd.setHours(23, 59, 59, 999);
+                
+                let tomorrowMin = Infinity;
+                let tomorrowMax = -Infinity;
+                let tomorrowDesc = '';
+                
+                forecastData.list.forEach(item => {
+                    const itemDate = new Date(item.dt * 1000);
+                    if (itemDate >= tomorrow && itemDate <= tomorrowEnd) {
+                        const itemTemp = item.main.temp;
+                        if (itemTemp < tomorrowMin) {
+                            tomorrowMin = itemTemp;
+                        }
+                        if (itemTemp > tomorrowMax) {
+                            tomorrowMax = itemTemp;
+                        }
+                        // 使用第一個預報的天氣描述
+                        if (!tomorrowDesc) {
+                            tomorrowDesc = item.weather[0].description;
+                        }
                     }
-                    if (tomorrowDescEl) {
-                        tomorrowDescEl.textContent = tomorrowDesc;
+                });
+                
+                // 如果找不到明天的數據，使用24小時後的預報
+                if (tomorrowMin === Infinity || tomorrowMax === -Infinity) {
+                    const tomorrowForecast = forecastData.list[8] || forecastData.list[forecastData.list.length - 1];
+                    if (tomorrowForecast) {
+                        tomorrowMin = tomorrowForecast.main.temp_min || tomorrowForecast.main.temp;
+                        tomorrowMax = tomorrowForecast.main.temp_max || tomorrowForecast.main.temp;
+                        tomorrowDesc = tomorrowForecast.weather[0].description;
                     }
+                }
+                
+                const tomorrowTempEl = document.getElementById('tomorrow-temp');
+                const tomorrowDescEl = document.getElementById('tomorrow-desc');
+                
+                if (tomorrowTempEl && tomorrowMin !== Infinity && tomorrowMax !== -Infinity) {
+                    tomorrowTempEl.textContent = `${Math.round(tomorrowMin)}°C ~ ${Math.round(tomorrowMax)}°C`;
+                }
+                if (tomorrowDescEl && tomorrowDesc) {
+                    tomorrowDescEl.textContent = tomorrowDesc;
                 }
             }
         } catch (forecastError) {
@@ -113,16 +240,24 @@ async function fetchWeather() {
         // 如果 API 失敗，使用模擬資料
         const mockWeather = {
             temp: '-2°C',
+            tempMin: -5,
+            tempMax: 2,
             desc: '多雲時晴（1月首爾平均溫度）',
         };
         document.getElementById('temperature').textContent = mockWeather.temp + ' (模擬)';
         document.getElementById('weather-desc').textContent = mockWeather.desc;
+        
+        const todayRangeEl = document.getElementById('today-range');
+        if (todayRangeEl) {
+            todayRangeEl.textContent = `今日溫度：${mockWeather.tempMin}°C ~ ${mockWeather.tempMax}°C (模擬)`;
+        }
+        
         document.getElementById('weather-update').textContent = new Date().toLocaleString('zh-TW');
         
         const tomorrowTempEl = document.getElementById('tomorrow-temp');
         const tomorrowDescEl = document.getElementById('tomorrow-desc');
         if (tomorrowTempEl) {
-            tomorrowTempEl.textContent = '-1°C (模擬)';
+            tomorrowTempEl.textContent = '-4°C ~ 1°C (模擬)';
         }
         if (tomorrowDescEl) {
             tomorrowDescEl.textContent = '多雲（模擬）';
@@ -174,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchExchangeRate();
     fetchWeather();
     updateTime();
+    setupRateSwapButton();
     
     // 每 5 分鐘更新一次匯率和天氣
     setInterval(fetchExchangeRate, 5 * 60 * 1000);
