@@ -7,6 +7,10 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
 </head>
 <body>
     <header>
@@ -202,34 +206,86 @@
         const customTimeInput = document.getElementById('customTime');
         const selectedTimeInput = document.getElementById('selectedTime');
 
-        // 載入已保存的行程
-        function loadSavedSchedules() {
-            const saved = localStorage.getItem(`schedules_${currentDay}`);
-            if (saved) {
-                const schedules = JSON.parse(saved);
-                schedules.forEach(schedule => {
-                    addScheduleItem(schedule.time, schedule.title, schedule.description, schedule.location, false);
-                });
-            }
+        // Firebase 資料庫引用
+        const schedulesRef = typeof firebase !== 'undefined' ? firebase.database().ref(`schedules/${currentDay}`) : null;
+        let scheduleItems = {}; // 儲存所有行程項目的 ID 對應
+
+        // 清除所有用戶新增的行程（保留原始行程）
+        function clearUserAddedSchedules() {
+            const userAddedItems = scheduleContainer.querySelectorAll('.schedule-item.user-added');
+            userAddedItems.forEach(item => item.remove());
         }
 
-        // 保存行程到 localStorage
+        // 載入已保存的行程（從 Firebase）
+        function loadSavedSchedules() {
+            if (!schedulesRef) return;
+            
+            schedulesRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                clearUserAddedSchedules();
+                scheduleItems = {};
+                
+                if (data) {
+                    Object.keys(data).forEach(key => {
+                        const schedule = data[key];
+                        const itemId = addScheduleItem(
+                            schedule.time, 
+                            schedule.title, 
+                            schedule.description, 
+                            schedule.location, 
+                            false, 
+                            key
+                        );
+                        scheduleItems[key] = itemId;
+                    });
+                }
+            });
+        }
+
+        // 保存行程到 Firebase
         function saveSchedules() {
+            if (!schedulesRef) {
+                // 回退到 localStorage
+                const items = scheduleContainer.querySelectorAll('.schedule-item.user-added');
+                const schedules = Array.from(items).map(item => ({
+                    time: item.querySelector('.time').textContent,
+                    title: item.querySelector('h3').textContent,
+                    description: item.querySelector('p:not(.location)').textContent,
+                    location: item.querySelector('.location') ? item.querySelector('.location').textContent.replace('📍 ', '') : ''
+                }));
+                localStorage.setItem(`schedules_${currentDay}`, JSON.stringify(schedules));
+                return;
+            }
+            
             const items = scheduleContainer.querySelectorAll('.schedule-item.user-added');
-            const schedules = Array.from(items).map(item => ({
-                time: item.querySelector('.time').textContent,
-                title: item.querySelector('h3').textContent,
-                description: item.querySelector('p:not(.location)').textContent,
-                location: item.querySelector('.location') ? item.querySelector('.location').textContent.replace('📍 ', '') : ''
-            }));
-            localStorage.setItem(`schedules_${currentDay}`, JSON.stringify(schedules));
+            const schedules = {};
+            
+            items.forEach((item, index) => {
+                const itemId = item.dataset.itemId || `item_${Date.now()}_${index}`;
+                schedules[itemId] = {
+                    time: item.querySelector('.time').textContent,
+                    title: item.querySelector('h3').textContent,
+                    description: item.querySelector('p:not(.location)').textContent,
+                    location: item.querySelector('.location') ? item.querySelector('.location').textContent.replace('📍 ', '') : '',
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                };
+                item.dataset.itemId = itemId;
+            });
+            
+            schedulesRef.set(schedules);
         }
 
         // 添加行程項目
-        function addScheduleItem(time, title, description, location, save = true) {
+        function addScheduleItem(time, title, description, location, save = true, itemId = null) {
             const scheduleItem = document.createElement('div');
             scheduleItem.className = 'schedule-item user-added';
             scheduleItem.style.position = 'relative';
+            
+            // 生成唯一的 ID
+            if (!itemId) {
+                itemId = `item_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            }
+            scheduleItem.dataset.itemId = itemId;
             
             const deleteBtn = `<button class="delete-schedule-btn" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #e74c3c; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">&times;</button>`;
             
@@ -247,16 +303,25 @@
             const deleteBtnEl = scheduleItem.querySelector('.delete-schedule-btn');
             if (deleteBtnEl) {
                 deleteBtnEl.addEventListener('click', function() {
-                    scheduleItem.remove();
-                    saveSchedules();
+                    if (schedulesRef) {
+                        // 從 Firebase 刪除
+                        schedulesRef.child(itemId).remove();
+                    } else {
+                        // 回退到本地刪除
+                        scheduleItem.remove();
+                        saveSchedules();
+                    }
                 });
             }
             
             scheduleContainer.appendChild(scheduleItem);
+            scheduleItems[itemId] = scheduleItem;
             
             if (save) {
                 saveSchedules();
             }
+            
+            return itemId;
         }
 
         // 打開模態框
@@ -340,7 +405,20 @@
         }
 
         // 頁面載入時載入已保存的行程
-        loadSavedSchedules();
+        // 檢查 Firebase 是否已初始化
+        if (typeof firebase !== 'undefined' && firebase.apps.length > 0) {
+            loadSavedSchedules();
+        } else {
+            // 如果 Firebase 未配置，回退到 localStorage
+            console.warn('Firebase 未配置，使用 localStorage 作為備用方案');
+            const saved = localStorage.getItem(`schedules_${currentDay}`);
+            if (saved) {
+                const schedules = JSON.parse(saved);
+                schedules.forEach(schedule => {
+                    addScheduleItem(schedule.time, schedule.title, schedule.description, schedule.location, false);
+                });
+            }
+        }
     </script>
 </body>
 </html>

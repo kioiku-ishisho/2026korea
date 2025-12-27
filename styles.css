@@ -551,8 +551,124 @@ footer {
         font-size: 1.2rem;
     }
 
+    /* Mobile Dashboard 模式 - 緊湊的 2 列佈局 */
     .info-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+        padding: 1rem 0.75rem;
+        border-radius: 10px;
+        min-height: auto;
+    }
+
+    .card-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card h2 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* 匯率卡片 - 更緊湊 */
+    .exchange-rate .rate-value {
+        font-size: 1.3rem !important;
+        margin: 0.3rem 0 !important;
+    }
+
+    .exchange-rate .rate-label {
+        font-size: 0.75rem !important;
+    }
+
+    .exchange-rate button {
+        padding: 0.2rem 0.5rem !important;
+        font-size: 0.7rem !important;
+    }
+
+    .exchange-rate .last-update {
+        font-size: 0.65rem !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .exchange-rate .reference {
+        font-size: 0.6rem !important;
+    }
+
+    /* 天氣卡片 - 更緊湊 */
+    .weather-info .temperature {
+        font-size: 1.5rem !important;
+    }
+
+    .weather-info .weather-desc {
+        font-size: 0.85rem !important;
+    }
+
+    .weather-info .temperature-range {
+        font-size: 0.8rem !important;
+    }
+
+    .weather-info .tomorrow-weather {
+        margin-top: 0.75rem !important;
+        padding-top: 0.75rem !important;
+    }
+
+    .weather-info .tomorrow-weather .temperature {
+        font-size: 1.2rem !important;
+    }
+
+    .weather-info .last-update {
+        font-size: 0.65rem !important;
+    }
+
+    .weather-info .reference {
+        font-size: 0.6rem !important;
+    }
+
+    /* 時間卡片 - 更緊湊 */
+    .time-info .time-value {
+        font-size: 1.2rem !important;
+    }
+
+    .time-info .time-label {
+        font-size: 0.8rem !important;
+    }
+
+    .time-info .time-note {
+        font-size: 0.7rem !important;
+        margin-top: 0.5rem !important;
+    }
+
+    /* 聯絡資訊卡片 - 更緊湊 */
+    .contact-info p {
+        font-size: 0.9rem !important;
+    }
+
+    .contact-info ul li {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .contact-info a {
+        font-size: 1.1rem !important;
+    }
+
+    /* 交通資訊卡片 - 更緊湊 */
+    .transport-info p,
+    .transport-info li {
+        font-size: 0.8rem !important;
+    }
+
+    /* 新聞卡片 - 更緊湊 */
+    .news-info p {
+        font-size: 0.8rem !important;
+    }
+
+    .news-info a {
+        font-size: 0.85rem !important;
     }
 
     .preparation-list {
@@ -612,6 +728,45 @@ footer {
 
     main {
         padding: 0 1rem;
+    }
+
+    /* Hero 區域在 mobile 上更緊湊 */
+    .hero {
+        padding: 2rem 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Quick links 區域更緊湊 */
+    .quick-links {
+        margin-bottom: 1.5rem;
+    }
+
+    .quick-links h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* 地圖區域在 mobile 上更小 */
+    #map {
+        height: 300px !important;
+    }
+
+    /* Day grid 在 mobile 上使用 2 列 */
+    .day-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .day-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .day-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .day-card p {
+        font-size: 0.85rem;
     }
 }
 

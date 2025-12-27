@@ -7,6 +7,10 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
 </head>
 <body>
     <header>
@@ -194,39 +198,126 @@
         const customTimeInput = document.getElementById('customTime');
         const selectedTimeInput = document.getElementById('selectedTime');
 
-        // 載入已保存的行程
-        function loadSavedSchedules() {
-            const saved = localStorage.getItem(`schedules_${currentDay}`);
-            if (saved) {
-                const schedules = JSON.parse(saved);
-                schedules.forEach(schedule => {
-                    addScheduleItem(schedule.time, schedule.title, schedule.description, schedule.location, false);
-                });
-            }
+        // Firebase 資料庫引用
+        const schedulesRef = firebase.database().ref(`schedules/${currentDay}`);
+        let scheduleItems = {}; // 儲存所有行程項目的 ID 對應
+
+        // 清除所有用戶新增的行程（保留原始行程）
+        function clearUserAddedSchedules() {
+            const userAddedItems = scheduleContainer.querySelectorAll('.schedule-item.user-added');
+            userAddedItems.forEach(item => item.remove());
         }
 
-        // 保存行程到 localStorage
+        // 載入已保存的行程（從 Firebase）
+        function loadSavedSchedules() {
+            schedulesRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                clearUserAddedSchedules();
+                scheduleItems = {};
+                
+                if (data) {
+                    Object.keys(data).forEach(key => {
+                        const schedule = data[key];
+                        const itemId = addScheduleItem(
+                            schedule.time, 
+                            schedule.title, 
+                            schedule.description, 
+                            schedule.location, 
+                            false, 
+                            key
+                        );
+                        scheduleItems[key] = itemId;
+                    });
+                    // 載入後排序
+                    sortSchedules();
+                }
+            });
+        }
+
+        // 保存行程到 Firebase
         function saveSchedules() {
             const items = scheduleContainer.querySelectorAll('.schedule-item.user-added');
-            const schedules = Array.from(items).map(item => ({
-                time: item.querySelector('.time').textContent,
-                title: item.querySelector('h3').textContent,
-                description: item.querySelector('p:not(.location)').textContent,
-                location: item.querySelector('.location') ? item.querySelector('.location').textContent.replace('📍 ', '') : ''
-            }));
-            localStorage.setItem(`schedules_${currentDay}`, JSON.stringify(schedules));
+            const schedules = {};
+            
+            items.forEach((item, index) => {
+                const itemId = item.dataset.itemId || `item_${Date.now()}_${index}`;
+                schedules[itemId] = {
+                    time: item.querySelector('.time').textContent,
+                    title: item.querySelector('h3').textContent,
+                    description: item.querySelector('p:not(.location)').textContent,
+                    location: item.querySelector('.location') ? item.querySelector('.location').textContent.replace('📍 ', '') : '',
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                };
+                item.dataset.itemId = itemId;
+            });
+            
+            schedulesRef.set(schedules);
+        }
+
+        // 將時間轉換為可比較的數值（用於排序）
+        function timeToNumber(time) {
+            const timeMap = {
+                '早上': 6,
+                '上午': 9,
+                '中午': 12,
+                '下午': 14,
+                '傍晚': 17,
+                '晚上': 19,
+                '深夜': 23
+            };
+            
+            if (timeMap[time]) {
+                return timeMap[time];
+            }
+            
+            // 處理具體時間格式 "HH:MM"
+            const timeMatch = time.match(/(\d{1,2}):(\d{2})/);
+            if (timeMatch) {
+                return parseInt(timeMatch[1]) + parseInt(timeMatch[2]) / 60;
+            }
+            
+            // 如果無法解析，返回一個很大的數字（排在最後）
+            return 99;
+        }
+
+        // 按時間排序行程（包括原始和新增的）
+        function sortSchedules() {
+            const allItems = Array.from(scheduleContainer.querySelectorAll('.schedule-item'));
+            
+            // 按時間排序所有行程
+            allItems.sort((a, b) => {
+                const timeA = a.querySelector('.time').textContent;
+                const timeB = b.querySelector('.time').textContent;
+                return timeToNumber(timeA) - timeToNumber(timeB);
+            });
+            
+            // 清空容器並按順序重新插入
+            allItems.forEach(item => item.remove());
+            allItems.forEach(item => scheduleContainer.appendChild(item));
         }
 
         // 添加行程項目
-        function addScheduleItem(time, title, description, location, save = true) {
+        function addScheduleItem(time, title, description, location, save = true, itemId = null) {
             const scheduleItem = document.createElement('div');
             scheduleItem.className = 'schedule-item user-added';
             scheduleItem.style.position = 'relative';
             
+            // 生成唯一的 ID
+            if (!itemId) {
+                itemId = `item_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            }
+            scheduleItem.dataset.itemId = itemId;
+            scheduleItem.dataset.time = time;
+            scheduleItem.dataset.title = title;
+            scheduleItem.dataset.description = description;
+            scheduleItem.dataset.location = location || '';
+            
             const deleteBtn = `<button class="delete-schedule-btn" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #e74c3c; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">&times;</button>`;
+            const editBtn = `<button class="edit-schedule-btn" style="position: absolute; top: 0.5rem; right: 2.5rem; background: #3498db; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" title="編輯">✏️</button>`;
             
             scheduleItem.innerHTML = `
                 ${deleteBtn}
+                ${editBtn}
                 <div class="time">${time}</div>
                 <div class="activity">
                     <h3>${title}</h3>
@@ -239,16 +330,70 @@
             const deleteBtnEl = scheduleItem.querySelector('.delete-schedule-btn');
             if (deleteBtnEl) {
                 deleteBtnEl.addEventListener('click', function() {
-                    scheduleItem.remove();
-                    saveSchedules();
+                    if (schedulesRef) {
+                        schedulesRef.child(itemId).remove();
+                    } else {
+                        scheduleItem.remove();
+                        saveSchedules();
+                    }
+                });
+            }
+            
+            // 添加編輯按鈕事件
+            const editBtnEl = scheduleItem.querySelector('.edit-schedule-btn');
+            if (editBtnEl) {
+                editBtnEl.addEventListener('click', function() {
+                    openEditModal(itemId, time, title, description, location);
                 });
             }
             
             scheduleContainer.appendChild(scheduleItem);
+            scheduleItems[itemId] = scheduleItem;
             
             if (save) {
                 saveSchedules();
+                sortSchedules();
             }
+            
+            return itemId;
+        }
+
+        // 打開編輯模態框
+        function openEditModal(itemId, time, title, description, location) {
+            // 設置編輯模式標記
+            scheduleForm.dataset.editMode = 'true';
+            scheduleForm.dataset.editItemId = itemId;
+            
+            // 預填表單
+            selectedTimeInput.value = '';
+            customTimeInput.value = '';
+            
+            // 判斷時間類型並預填
+            const timeMatch = time.match(/(\d{1,2}):(\d{2})/);
+            if (timeMatch) {
+                customTimeInput.value = time;
+            } else {
+                // 找到對應的時間選項按鈕
+                const timeBtn = Array.from(timeOptionBtns).find(btn => btn.dataset.time === time);
+                if (timeBtn) {
+                    timeBtn.click();
+                } else {
+                    selectedTimeInput.value = time;
+                }
+            }
+            
+            document.getElementById('scheduleTitle').value = title;
+            document.getElementById('scheduleDescription').value = description || '';
+            document.getElementById('scheduleLocation').value = location || '';
+            
+            // 更改標題和按鈕文字
+            const modalTitle = scheduleModal.querySelector('h2');
+            modalTitle.textContent = '✏️ 編輯行程';
+            const submitBtn = scheduleForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = '更新';
+            
+            // 打開模態框
+            scheduleModal.style.display = 'flex';
         }
 
         // 打開模態框
@@ -265,7 +410,20 @@
             scheduleForm.reset();
             selectedTimeInput.value = '';
             customTimeInput.value = '';
-            timeOptionBtns.forEach(btn => btn.style.background = 'white');
+            timeOptionBtns.forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.color = '#667eea';
+            });
+            
+            // 清除編輯模式標記
+            delete scheduleForm.dataset.editMode;
+            delete scheduleForm.dataset.editItemId;
+            
+            // 恢復標題和按鈕文字
+            const modalTitle = scheduleModal.querySelector('h2');
+            modalTitle.textContent = '➕ 新增行程';
+            const submitBtn = scheduleForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = '新增';
         }
 
         closeModalBtn.addEventListener('click', closeModal);
@@ -316,12 +474,66 @@
                 return;
             }
             
-            addScheduleItem(time, title, description, location);
+            // 檢查是否為編輯模式
+            const isEditMode = scheduleForm.dataset.editMode === 'true';
+            const editItemId = scheduleForm.dataset.editItemId;
+            
+            if (isEditMode && editItemId) {
+                // 編輯模式：更新現有行程
+                const existingItem = scheduleContainer.querySelector(`[data-item-id="${editItemId}"]`);
+                if (existingItem) {
+                    // 更新 DOM
+                    existingItem.querySelector('.time').textContent = time;
+                    existingItem.querySelector('h3').textContent = title;
+                    existingItem.querySelector('p:not(.location)').textContent = description;
+                    const locationEl = existingItem.querySelector('.location');
+                    if (location) {
+                        if (locationEl) {
+                            locationEl.textContent = `📍 ${location}`;
+                        } else {
+                            const activityDiv = existingItem.querySelector('.activity');
+                            const locationP = document.createElement('p');
+                            locationP.className = 'location';
+                            locationP.textContent = `📍 ${location}`;
+                            activityDiv.appendChild(locationP);
+                        }
+                    } else {
+                        if (locationEl) locationEl.remove();
+                    }
+                    
+                    // 更新 data 屬性
+                    existingItem.dataset.time = time;
+                    existingItem.dataset.title = title;
+                    existingItem.dataset.description = description;
+                    existingItem.dataset.location = location || '';
+                    
+                    // 保存到 Firebase
+                    saveSchedules();
+                    sortSchedules();
+                }
+            } else {
+                // 新增模式：添加新行程
+                addScheduleItem(time, title, description, location);
+            }
+            
             closeModal();
         });
 
         // 頁面載入時載入已保存的行程
-        loadSavedSchedules();
+        // 檢查 Firebase 是否已初始化
+        if (typeof firebase !== 'undefined' && firebase.apps.length > 0) {
+            loadSavedSchedules();
+        } else {
+            // 如果 Firebase 未配置，回退到 localStorage
+            console.warn('Firebase 未配置，使用 localStorage 作為備用方案');
+            const saved = localStorage.getItem(`schedules_${currentDay}`);
+            if (saved) {
+                const schedules = JSON.parse(saved);
+                schedules.forEach(schedule => {
+                    addScheduleItem(schedule.time, schedule.title, schedule.description, schedule.location, false);
+                });
+            }
+        }
     </script>
 </body>
 </html>
