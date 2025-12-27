@@ -750,6 +750,16 @@ footer::before {
     }
 }
 
+/* 新增行程模態框樣式 - 確保在 header 之上 */
+.schedule-modal {
+    z-index: 2000 !important;
+}
+
+.schedule-modal .modal-content {
+    position: relative;
+    z-index: 2001;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
