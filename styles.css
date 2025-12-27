@@ -7,14 +7,36 @@
 body {
     font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #1A1A1A;
+    background: #FFFFFF;
     min-height: 100vh;
+    position: relative;
+}
+
+/* 韓國文化背景裝飾 - 現代化設計 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 71, 160, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(205, 46, 58, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
 }
 
 header {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: #FFFFFF;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    border-bottom: 3px solid #0047A0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -33,11 +55,23 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #667eea;
+    color: #1A1A1A;
     text-decoration: none;
     display: block;
     margin-right: 2rem;
     margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #0047A0 0%, #CD2E3A 100%);
+    border-radius: 2px;
 }
 
 .logo:hover {
@@ -54,7 +88,7 @@ nav {
 .menu-toggle span {
     width: 25px;
     height: 3px;
-    background: #667eea;
+    background: #1A1A1A;
     margin: 3px 0;
     transition: 0.3s;
     border-radius: 3px;
@@ -69,17 +103,34 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
+    color: #1A1A1A;
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0047A0 0%, #CD2E3A 100%);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::before,
+.nav-links a.active::before {
+    width: 80%;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    background: #667eea;
-    color: white;
+    color: #0047A0;
 }
 
 main {
@@ -90,28 +141,39 @@ main {
 
 .hero {
     text-align: center;
-    color: white;
+    color: #1A1A1A;
     padding: 4rem 2rem;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/><circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.05)"/><circle cx="1000" cy="450" r="120" fill="rgba(255,255,255,0.05)"/><circle cx="600" cy="300" r="100" fill="rgba(255,255,255,0.05)"/></svg>');
-    background-size: cover, auto;
-    background-position: center;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: #FFFFFF;
+    border: 3px solid #0047A0;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 71, 160, 0.15);
     position: relative;
     overflow: hidden;
 }
 
+/* 韓國傳統圖案裝飾 - 現代化設計 */
 .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 71, 160, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(205, 46, 58, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
     pointer-events: none;
 }
 
@@ -124,12 +186,25 @@ main {
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #1A1A1A;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero h1::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #0047A0 0%, #CD2E3A 100%);
+    margin: 1rem auto;
+    border-radius: 2px;
 }
 
 .hero p {
     font-size: 1.5rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: #333;
+    font-weight: 500;
 }
 
 .info-cards {
@@ -140,16 +215,36 @@ main {
 }
 
 .card {
-    background: white;
+    background: #FFFFFF;
     border-radius: 15px;
     padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #E8E8E8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #0047A0 0%, #CD2E3A 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.card:hover::before {
+    transform: scaleY(1);
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 71, 160, 0.15);
+    border-color: #0047A0;
 }
 
 .card-icon {
@@ -159,10 +254,25 @@ main {
 }
 
 .card h2 {
-    color: #667eea;
+    color: #1A1A1A;
     margin-bottom: 1rem;
     text-align: center;
     font-size: 1.5rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.card h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #0047A0 0%, #CD2E3A 100%);
+    border-radius: 2px;
 }
 
 .exchange-rate,
@@ -177,16 +287,24 @@ main {
 .rate-value {
     font-size: 2rem;
     font-weight: bold;
-    color: #667eea;
+    color: #0047A0;
     margin: 0.5rem 0;
 }
 
-#swap-rate-btn:hover {
-    background: #5568d3;
+#swap-rate-btn,
+#swap-usd-krw-btn {
+    background: #0047A0;
+    color: white;
 }
 
-#swap-rate-btn:active {
-    background: #4457c1;
+#swap-rate-btn:hover,
+#swap-usd-krw-btn:hover {
+    background: #003380;
+}
+
+#swap-rate-btn:active,
+#swap-usd-krw-btn:active {
+    background: #002966;
 }
 
 .rate-label {
@@ -197,7 +315,7 @@ main {
 .temperature {
     font-size: 3rem;
     font-weight: bold;
-    color: #ff6b6b;
+    color: #CD2E3A;
     margin: 1rem 0;
 }
 
@@ -209,7 +327,7 @@ main {
 
 .location {
     font-size: 1.1rem;
-    color: #667eea;
+    color: #0047A0;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
@@ -252,7 +370,7 @@ main {
 .time-value {
     font-size: 2rem;
     font-weight: bold;
-    color: #667eea;
+    color: #1A1A1A;
     margin: 0.5rem 0;
 }
 
@@ -270,10 +388,11 @@ main {
 }
 
 .prep-category {
-    background: #f8f9fa;
+    background: #F8F9FA;
     padding: 1.5rem;
     border-radius: 10px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #0047A0;
+    border-right: 2px solid #CD2E3A;
 }
 
 .prep-category h3 {
@@ -326,10 +445,25 @@ main {
 }
 
 .quick-links h2 {
-    color: #667eea;
+    color: #1A1A1A;
     margin-bottom: 2rem;
     text-align: center;
     font-size: 2rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.quick-links h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #0047A0 0%, #CD2E3A 100%);
+    border-radius: 2px;
 }
 
 .day-grid {
@@ -339,19 +473,39 @@ main {
 }
 
 .day-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: #FFFFFF;
+    color: #1A1A1A;
     padding: 2rem;
     border-radius: 10px;
     text-decoration: none;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid #E8E8E8;
+    position: relative;
+    overflow: hidden;
+}
+
+.day-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #0047A0 0%, #CD2E3A 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.day-card:hover::before {
+    transform: scaleX(1);
 }
 
 .day-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 71, 160, 0.2);
+    border-color: #0047A0;
 }
 
 .day-card h3 {
@@ -375,9 +529,10 @@ main {
 }
 
 .day-header h1 {
-    color: #667eea;
+    color: #1A1A1A;
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .day-header .date {
@@ -394,11 +549,23 @@ main {
 }
 
 .schedule-section h2 {
-    color: #667eea;
+    color: #1A1A1A;
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
-    border-bottom: 3px solid #667eea;
+    font-weight: 700;
+    border-bottom: 3px solid #0047A0;
     padding-bottom: 0.5rem;
+    position: relative;
+}
+
+.schedule-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 30%;
+    height: 3px;
+    background: #CD2E3A;
 }
 
 .schedule-item {
@@ -406,16 +573,40 @@ main {
     gap: 1.5rem;
     margin-bottom: 2rem;
     padding: 1.5rem;
-    background: #f8f9fa;
+    background: #F8F9FA;
     border-radius: 10px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #0047A0;
+    border-right: 2px solid #CD2E3A;
+    transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+    background: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0, 71, 160, 0.1);
 }
 
 .time {
     font-weight: bold;
-    color: #667eea;
+    color: #1A1A1A;
     font-size: 1.2rem;
     min-width: 100px;
+    position: relative;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.time::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    background: linear-gradient(180deg, #0047A0 0%, #CD2E3A 100%);
+    border-radius: 2px;
 }
 
 .activity {
@@ -434,7 +625,7 @@ main {
 }
 
 .activity .location {
-    color: #667eea;
+    color: #0047A0;
     font-weight: bold;
     margin-top: 0.5rem;
 }
@@ -453,11 +644,23 @@ main {
 }
 
 footer {
-    background: rgba(255, 255, 255, 0.95);
+    background: #FFFFFF;
     text-align: center;
     padding: 2rem;
     margin-top: 3rem;
     color: #666;
+    border-top: 3px solid #0047A0;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 30%;
+    height: 3px;
+    background: #CD2E3A;
 }
 
 .footer-links {
@@ -470,16 +673,19 @@ footer {
 }
 
 .footer-links a {
-    color: #667eea;
+    color: #0047A0;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
 }
 
 .footer-links a:hover {
-    color: #5568d3;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%);
 }
 
 .instagram-link {
@@ -497,7 +703,7 @@ footer {
 
 .next-day-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5) !important;
+    box-shadow: 0 8px 20px rgba(0, 71, 160, 0.4) !important;
 }
 
 .next-day-btn:active {
@@ -506,7 +712,7 @@ footer {
 
 .add-schedule-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
+    box-shadow: 0 6px 20px rgba(0, 71, 160, 0.4) !important;
 }
 
 .add-schedule-btn:active {
@@ -514,12 +720,14 @@ footer {
 }
 
 .time-option-btn:hover {
-    background: #f0f0f0 !important;
+    background: #F0F0F0 !important;
+    border-color: #0047A0 !important;
 }
 
 .time-option-btn.active {
-    background: #667eea !important;
+    background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%) !important;
     color: white !important;
+    border-color: transparent !important;
 }
 
 .delete-schedule-btn:hover {
@@ -767,6 +975,56 @@ footer {
 
     .day-card p {
         font-size: 0.85rem;
+    }
+}
+
+/* 返回頁首按鈕 */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%);
+    color: white;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 71, 160, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.scroll-to-top.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: linear-gradient(135deg, #003380 0%, #B0252E 100%);
+    box-shadow: 0 6px 20px rgba(0, 71, 160, 0.5);
+    transform: translateY(-3px);
+}
+
+.scroll-to-top:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 }
 

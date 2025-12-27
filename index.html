@@ -41,7 +41,7 @@
         <section class="quick-links" style="margin-bottom: 2rem; text-align: center;">
             <h2>📋 行前準備</h2>
             <p style="margin: 1.5rem 0; color: #666;">出發前必備物品與注意事項清單</p>
-            <a href="preparation.html" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.3s ease;">
+            <a href="preparation.html" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0, 71, 160, 0.3);">
                 查看完整行前準備清單 →
             </a>
         </section>
@@ -54,7 +54,7 @@
                     <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e0e0e0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                             <p class="rate-label" style="margin: 0;"><strong id="usd-rate-display-label">1 美元 (USD) =</strong></p>
-                            <button id="swap-usd-krw-btn" style="background: #667eea; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s;">
+                            <button id="swap-usd-krw-btn" style="background: #0047A0; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s;">
                                 🔄 切換
                             </button>
                         </div>
@@ -64,7 +64,7 @@
                     <div style="margin-top: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                             <p class="rate-label" style="margin: 0;"><strong id="rate-display-label">1 新台幣 (TWD) =</strong></p>
-                            <button id="swap-rate-btn" style="background: #667eea; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s;">
+                            <button id="swap-rate-btn" style="background: #0047A0; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s;">
                                 🔄 切換
                             </button>
                         </div>
@@ -165,11 +165,11 @@
                         掌握首爾最新資訊，了解當地動態與活動
                     </p>
                     <div style="margin-top: 1rem;">
-                        <a href="https://tchinese.seoul.go.kr/" target="_blank" rel="noopener noreferrer" style="display: inline-block; color: #667eea; text-decoration: none; font-weight: bold; margin-bottom: 0.5rem;">
-                            📰 首爾市官方新聞 →
+                        <a href="https://news.kbs.co.kr/special/english/main.do?bcd=0200#20251226" target="_blank" rel="noopener noreferrer" style="display: inline-block; color: #667eea; text-decoration: none; font-weight: bold; margin-bottom: 0.5rem;">
+                            📰 KBS 英文版 →
                         </a>
                         <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">
-                            查看首爾市最新政策、活動與觀光資訊
+                            查看韓國最新新聞與時事資訊（英文版）
                         </p>
                     </div>
                 </div>
@@ -404,6 +404,30 @@
                 }
             );
         }
+    </script>
+
+    <!-- 返回頁首按鈕 -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="返回頁首">↑</button>
+    <script>
+        // 返回頁首按鈕功能
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        // 監聽滾動事件
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // 點擊按鈕返回頁首
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 </html>

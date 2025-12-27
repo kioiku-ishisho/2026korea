@@ -43,7 +43,7 @@
                     <h1>第三天 - 弘大商圈・咖啡廳</h1>
                     <p class="date">2026年1月9日 (星期五)</p>
                 </div>
-                <button id="addScheduleBtn" class="add-schedule-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
+                <button id="addScheduleBtn" class="add-schedule-btn" style="background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 71, 160, 0.3); transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
                     ➕ 新增行程
                 </button>
             </div>
@@ -104,18 +104,18 @@
         <div id="scheduleModal" class="schedule-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 2000; justify-content: center; align-items: center;">
             <div class="modal-content" style="background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h2 style="color: #667eea; margin: 0;">➕ 新增行程</h2>
+                    <h2 style="color: #0047A0; margin: 0;">➕ 新增行程</h2>
                     <button id="closeModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">&times;</button>
                 </div>
                 <form id="scheduleForm">
                     <div style="margin-bottom: 1.5rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">時間選擇：</label>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
-                            <button type="button" class="time-option-btn" data-time="早上" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">早上</button>
-                            <button type="button" class="time-option-btn" data-time="中午" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">中午</button>
-                            <button type="button" class="time-option-btn" data-time="下午" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">下午</button>
-                            <button type="button" class="time-option-btn" data-time="傍晚" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">傍晚</button>
-                            <button type="button" class="time-option-btn" data-time="晚上" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">晚上</button>
+                            <button type="button" class="time-option-btn" data-time="早上" style="padding: 0.5rem 1rem; border: 2px solid #0047A0; background: white; color: #0047A0; border-radius: 8px; cursor: pointer; transition: all 0.3s;">早上</button>
+                            <button type="button" class="time-option-btn" data-time="中午" style="padding: 0.5rem 1rem; border: 2px solid #0047A0; background: white; color: #0047A0; border-radius: 8px; cursor: pointer; transition: all 0.3s;">中午</button>
+                            <button type="button" class="time-option-btn" data-time="下午" style="padding: 0.5rem 1rem; border: 2px solid #0047A0; background: white; color: #0047A0; border-radius: 8px; cursor: pointer; transition: all 0.3s;">下午</button>
+                            <button type="button" class="time-option-btn" data-time="傍晚" style="padding: 0.5rem 1rem; border: 2px solid #0047A0; background: white; color: #0047A0; border-radius: 8px; cursor: pointer; transition: all 0.3s;">傍晚</button>
+                            <button type="button" class="time-option-btn" data-time="晚上" style="padding: 0.5rem 1rem; border: 2px solid #0047A0; background: white; color: #0047A0; border-radius: 8px; cursor: pointer; transition: all 0.3s;">晚上</button>
                         </div>
                         <div style="margin-top: 1rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">或自訂時間：</label>
@@ -137,7 +137,7 @@
                     </div>
                     <div style="display: flex; gap: 1rem; justify-content: flex-end;">
                         <button type="button" id="cancelBtn" style="padding: 0.8rem 1.5rem; border: 2px solid #e0e0e0; background: white; color: #666; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">取消</button>
-                        <button type="submit" style="padding: 0.8rem 1.5rem; border: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">新增</button>
+                        <button type="submit" style="padding: 0.8rem 1.5rem; border: none; background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%); color: white; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">新增</button>
                     </div>
                 </form>
             </div>
@@ -158,7 +158,7 @@
         </section>
 
         <section class="schedule-section" style="text-align: center; margin-top: 3rem;">
-            <a href="day4.html" class="next-day-btn" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: bold; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
+            <a href="day4.html" class="next-day-btn" style="display: inline-block; background: linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: bold; box-shadow: 0 5px 15px rgba(0, 71, 160, 0.3); transition: all 0.3s ease;">
                 ➡️ 前往第四天行程
             </a>
         </section>
@@ -323,11 +323,17 @@
                 itemId = `item_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
             }
             scheduleItem.dataset.itemId = itemId;
+            scheduleItem.dataset.time = time;
+            scheduleItem.dataset.title = title;
+            scheduleItem.dataset.description = description;
+            scheduleItem.dataset.location = location || '';
             
             const deleteBtn = `<button class="delete-schedule-btn" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #e74c3c; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">&times;</button>`;
+            const editBtn = `<button class="edit-schedule-btn" style="position: absolute; top: 0.5rem; right: 2.5rem; background: #3498db; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" title="編輯">✏️</button>`;
             
             scheduleItem.innerHTML = `
                 ${deleteBtn}
+                ${editBtn}
                 <div class="time">${time}</div>
                 <div class="activity">
                     <h3>${title}</h3>
@@ -341,13 +347,19 @@
             if (deleteBtnEl) {
                 deleteBtnEl.addEventListener('click', function() {
                     if (schedulesRef) {
-                        // 從 Firebase 刪除
                         schedulesRef.child(itemId).remove();
                     } else {
-                        // 回退到本地刪除
                         scheduleItem.remove();
                         saveSchedules();
                     }
+                });
+            }
+            
+            // 添加編輯按鈕事件
+            const editBtnEl = scheduleItem.querySelector('.edit-schedule-btn');
+            if (editBtnEl) {
+                editBtnEl.addEventListener('click', function() {
+                    openEditModal(itemId, time, title, description, location);
                 });
             }
             
@@ -356,9 +368,42 @@
             
             if (save) {
                 saveSchedules();
+                sortSchedules();
             }
             
             return itemId;
+        }
+
+        // 打開編輯模態框
+        function openEditModal(itemId, time, title, description, location) {
+            scheduleForm.dataset.editMode = 'true';
+            scheduleForm.dataset.editItemId = itemId;
+            
+            selectedTimeInput.value = '';
+            customTimeInput.value = '';
+            
+            const timeMatch = time.match(/(\d{1,2}):(\d{2})/);
+            if (timeMatch) {
+                customTimeInput.value = time;
+            } else {
+                const timeBtn = Array.from(timeOptionBtns).find(btn => btn.dataset.time === time);
+                if (timeBtn) {
+                    timeBtn.click();
+                } else {
+                    selectedTimeInput.value = time;
+                }
+            }
+            
+            document.getElementById('scheduleTitle').value = title;
+            document.getElementById('scheduleDescription').value = description || '';
+            document.getElementById('scheduleLocation').value = location || '';
+            
+            const modalTitle = scheduleModal.querySelector('h2');
+            modalTitle.textContent = '✏️ 編輯行程';
+            const submitBtn = scheduleForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = '更新';
+            
+            scheduleModal.style.display = 'flex';
         }
 
         // 打開模態框
@@ -408,9 +453,9 @@
             btn.addEventListener('click', function() {
                 timeOptionBtns.forEach(b => {
                     b.style.background = 'white';
-                    b.style.color = '#667eea';
+                    b.style.color = '#0047A0';
                 });
-                this.style.background = '#667eea';
+                this.style.background = 'linear-gradient(135deg, #0047A0 0%, #CD2E3A 100%)';
                 this.style.color = 'white';
                 selectedTimeInput.value = this.dataset.time;
                 customTimeInput.value = '';
@@ -504,6 +549,30 @@
                 });
             }
         }
+    </script>
+
+    <!-- 返回頁首按鈕 -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="返回頁首">↑</button>
+    <script>
+        // 返回頁首按鈕功能
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        // 監聽滾動事件
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // 點擊按鈕返回頁首
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 </html>

@@ -138,7 +138,31 @@ async function fetchWeather() {
             throw new Error('請設定 OpenWeatherMap API key');
         }
         
-        // 取得今日天氣
+        // 檢查是否為同一天，如果是同一天，使用保存的溫度範圍
+        const today = new Date().toDateString();
+        const savedWeather = localStorage.getItem('weatherData');
+        let savedData = null;
+        
+        if (savedWeather) {
+            try {
+                savedData = JSON.parse(savedWeather);
+                // 檢查保存的日期是否為今天
+                if (savedData.date === today) {
+                    // 使用保存的溫度範圍
+                    const todayRangeEl = document.getElementById('today-range');
+                    if (todayRangeEl) {
+                        todayRangeEl.textContent = `今日溫度：${savedData.tempMin}°C ~ ${savedData.tempMax}°C`;
+                    }
+                } else {
+                    // 不是同一天，清除舊數據
+                    savedData = null;
+                }
+            } catch (e) {
+                savedData = null;
+            }
+        }
+        
+        // 取得今日天氣（用於更新當前溫度）
         const todayResponse = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw`
         );
@@ -149,17 +173,30 @@ async function fetchWeather() {
         
         const todayData = await todayResponse.json();
         const temp = Math.round(todayData.main.temp);
-        const tempMin = Math.round(todayData.main.temp_min);
-        const tempMax = Math.round(todayData.main.temp_max);
         const desc = todayData.weather[0].description;
         
+        // 更新當前溫度（每次都會更新）
         document.getElementById('temperature').textContent = `${temp}°C`;
         document.getElementById('weather-desc').textContent = desc;
         
-        // 顯示今日溫度範圍
-        const todayRangeEl = document.getElementById('today-range');
-        if (todayRangeEl) {
-            todayRangeEl.textContent = `今日溫度：${tempMin}°C ~ ${tempMax}°C`;
+        // 如果沒有保存的數據或不是同一天，獲取新的溫度範圍
+        if (!savedData || savedData.date !== today) {
+            const tempMin = Math.round(todayData.main.temp_min);
+            const tempMax = Math.round(todayData.main.temp_max);
+            
+            // 保存今天的溫度範圍
+            const weatherData = {
+                date: today,
+                tempMin: tempMin,
+                tempMax: tempMax
+            };
+            localStorage.setItem('weatherData', JSON.stringify(weatherData));
+            
+            // 顯示今日溫度範圍
+            const todayRangeEl = document.getElementById('today-range');
+            if (todayRangeEl) {
+                todayRangeEl.textContent = `今日溫度：${tempMin}°C ~ ${tempMax}°C`;
+            }
         }
         
         document.getElementById('weather-update').textContent = new Date().toLocaleString('zh-TW');
