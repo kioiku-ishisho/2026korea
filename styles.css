@@ -36,6 +36,8 @@ nav {
     color: #667eea;
     text-decoration: none;
     display: block;
+    margin-right: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .logo:hover {
@@ -493,6 +495,53 @@ footer {
     transition: transform 0.3s ease;
 }
 
+.next-day-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5) !important;
+}
+
+.next-day-btn:active {
+    transform: translateY(0);
+}
+
+.add-schedule-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
+}
+
+.add-schedule-btn:active {
+    transform: translateY(0);
+}
+
+.time-option-btn:hover {
+    background: #f0f0f0 !important;
+}
+
+.time-option-btn.active {
+    background: #667eea !important;
+    color: white !important;
+}
+
+.delete-schedule-btn:hover {
+    background: #c0392b !important;
+    transform: scale(1.1);
+}
+
+.schedule-item.user-added {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
@@ -553,6 +602,12 @@ footer {
 
     nav {
         position: relative;
+        padding: 1.5rem 1.5rem;
+    }
+    
+    .logo {
+        margin-right: 1.5rem;
+        margin-bottom: 0.75rem;
     }
 
     main {

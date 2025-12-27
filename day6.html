@@ -85,7 +85,51 @@
                     <p class="location">📍 明洞 / 弘大 / Olive Young</p>
                 </div>
             </div>
+            </div>
         </section>
+
+        <!-- 新增行程模態框 -->
+        <div id="scheduleModal" class="schedule-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 2000; justify-content: center; align-items: center;">
+            <div class="modal-content" style="background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="color: #667eea; margin: 0;">➕ 新增行程</h2>
+                    <button id="closeModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">&times;</button>
+                </div>
+                <form id="scheduleForm">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">時間選擇：</label>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                            <button type="button" class="time-option-btn" data-time="早上" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">早上</button>
+                            <button type="button" class="time-option-btn" data-time="中午" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">中午</button>
+                            <button type="button" class="time-option-btn" data-time="下午" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">下午</button>
+                            <button type="button" class="time-option-btn" data-time="傍晚" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">傍晚</button>
+                            <button type="button" class="time-option-btn" data-time="晚上" style="padding: 0.5rem 1rem; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; transition: all 0.3s;">晚上</button>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">或自訂時間：</label>
+                            <input type="time" id="customTime" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                        </div>
+                        <input type="hidden" id="selectedTime" value="">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="scheduleTitle" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">行程標題：</label>
+                        <input type="text" id="scheduleTitle" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="scheduleDescription" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">行程描述：</label>
+                        <textarea id="scheduleDescription" rows="4" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="scheduleLocation" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">地點：</label>
+                        <input type="text" id="scheduleLocation" placeholder="📍 例如：明洞、景福宮等" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                    </div>
+                    <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                        <button type="button" id="cancelBtn" style="padding: 0.8rem 1.5rem; border: 2px solid #e0e0e0; background: white; color: #666; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">取消</button>
+                        <button type="submit" style="padding: 0.8rem 1.5rem; border: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">新增</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <section class="schedule-section">
             <h2>💡 貼心提醒</h2>
@@ -100,6 +144,12 @@
                     <li>明洞和弘大都有 Olive Young，可購買韓國美妝保養品</li>
                 </ul>
             </div>
+        </section>
+
+        <section class="schedule-section" style="text-align: center; margin-top: 3rem;">
+            <a href="day7.html" class="next-day-btn" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: bold; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
+                ➡️ 前往第七天行程
+            </a>
         </section>
     </main>
 
@@ -130,6 +180,158 @@
                 });
             });
         }
+
+        // 行程編輯功能
+        const currentDay = 'day6';
+        const scheduleContainer = document.getElementById('scheduleContainer');
+        const addScheduleBtn = document.getElementById('addScheduleBtn');
+        const scheduleModal = document.getElementById('scheduleModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const scheduleForm = document.getElementById('scheduleForm');
+        const timeOptionBtns = document.querySelectorAll('.time-option-btn');
+        const customTimeInput = document.getElementById('customTime');
+        const selectedTimeInput = document.getElementById('selectedTime');
+
+        // 載入已保存的行程
+        function loadSavedSchedules() {
+            const saved = localStorage.getItem(`schedules_${currentDay}`);
+            if (saved) {
+                const schedules = JSON.parse(saved);
+                schedules.forEach(schedule => {
+                    addScheduleItem(schedule.time, schedule.title, schedule.description, schedule.location, false);
+                });
+            }
+        }
+
+        // 保存行程到 localStorage
+        function saveSchedules() {
+            const items = scheduleContainer.querySelectorAll('.schedule-item.user-added');
+            const schedules = Array.from(items).map(item => ({
+                time: item.querySelector('.time').textContent,
+                title: item.querySelector('h3').textContent,
+                description: item.querySelector('p:not(.location)').textContent,
+                location: item.querySelector('.location') ? item.querySelector('.location').textContent.replace('📍 ', '') : ''
+            }));
+            localStorage.setItem(`schedules_${currentDay}`, JSON.stringify(schedules));
+        }
+
+        // 添加行程項目
+        function addScheduleItem(time, title, description, location, save = true) {
+            const scheduleItem = document.createElement('div');
+            scheduleItem.className = 'schedule-item user-added';
+            scheduleItem.style.position = 'relative';
+            
+            const deleteBtn = `<button class="delete-schedule-btn" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #e74c3c; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">&times;</button>`;
+            
+            scheduleItem.innerHTML = `
+                ${deleteBtn}
+                <div class="time">${time}</div>
+                <div class="activity">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                    ${location ? `<p class="location">📍 ${location}</p>` : ''}
+                </div>
+            `;
+            
+            // 添加刪除按鈕事件
+            const deleteBtnEl = scheduleItem.querySelector('.delete-schedule-btn');
+            if (deleteBtnEl) {
+                deleteBtnEl.addEventListener('click', function() {
+                    scheduleItem.remove();
+                    saveSchedules();
+                });
+            }
+            
+            scheduleContainer.appendChild(scheduleItem);
+            
+            if (save) {
+                saveSchedules();
+            }
+        }
+
+        // 打開模態框
+        if (addScheduleBtn) {
+            addScheduleBtn.addEventListener('click', function() {
+                scheduleModal.style.display = 'flex';
+                selectedTimeInput.value = '';
+                customTimeInput.value = '';
+                timeOptionBtns.forEach(btn => btn.style.background = 'white');
+            });
+        }
+
+        // 關閉模態框
+        function closeModal() {
+            scheduleModal.style.display = 'none';
+            scheduleForm.reset();
+            selectedTimeInput.value = '';
+            customTimeInput.value = '';
+            timeOptionBtns.forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.color = '#667eea';
+            });
+        }
+
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+        if (scheduleModal) {
+            scheduleModal.addEventListener('click', function(e) {
+                if (e.target === scheduleModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // 時間選項按鈕
+        timeOptionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                timeOptionBtns.forEach(b => {
+                    b.style.background = 'white';
+                    b.style.color = '#667eea';
+                });
+                this.style.background = '#667eea';
+                this.style.color = 'white';
+                selectedTimeInput.value = this.dataset.time;
+                customTimeInput.value = '';
+            });
+        });
+
+        // 自訂時間
+        if (customTimeInput) {
+            customTimeInput.addEventListener('change', function() {
+                if (this.value) {
+                    const [hours, minutes] = this.value.split(':');
+                    selectedTimeInput.value = `${hours}:${minutes}`;
+                    timeOptionBtns.forEach(btn => {
+                        btn.style.background = 'white';
+                        btn.style.color = '#667eea';
+                    });
+                }
+            });
+        }
+
+        // 提交表單
+        if (scheduleForm) {
+            scheduleForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const time = selectedTimeInput.value || customTimeInput.value || '未設定';
+                const title = document.getElementById('scheduleTitle').value;
+                const description = document.getElementById('scheduleDescription').value;
+                const location = document.getElementById('scheduleLocation').value;
+                
+                if (!title) {
+                    alert('請輸入行程標題');
+                    return;
+                }
+                
+                addScheduleItem(time, title, description, location);
+                closeModal();
+            });
+        }
+
+        // 頁面載入時載入已保存的行程
+        loadSavedSchedules();
     </script>
 </body>
 </html>
