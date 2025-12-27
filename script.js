@@ -16,7 +16,10 @@ let currentUsdKrwMode = 'usd-krw'; // 'usd-krw' 或 'krw-usd'
 
 async function fetchExchangeRate() {
     try {
-        const apiKey = '3f4dad549c5add47df56ed91'; // ExchangeRate-API key
+        // 從配置文件讀取 API key
+        const apiKey = (typeof API_CONFIG !== 'undefined' && API_CONFIG.exchangeRateApiKey) 
+            ? API_CONFIG.exchangeRateApiKey 
+            : 'YOUR_EXCHANGE_RATE_API_KEY';
         
         if (apiKey === 'YOUR_EXCHANGE_RATE_API_KEY') {
             // 如果沒有設定 API key，使用免費的備用 API
@@ -131,10 +134,13 @@ function setupRateSwapButton() {
 // 天氣資訊（使用 OpenWeatherMap API）
 async function fetchWeather() {
     try {
-        const apiKey = '94f6ef8b9f2e1811a5e82d91b8935e38'; // OpenWeatherMap API key
+        // 從配置文件讀取 API key
+        const apiKey = (typeof API_CONFIG !== 'undefined' && API_CONFIG.openWeatherMapApiKey) 
+            ? API_CONFIG.openWeatherMapApiKey 
+            : 'YOUR_OPENWEATHERMAP_API_KEY';
         const city = 'Seoul';
         
-        if (apiKey === 'YOUR_API_KEY') {
+        if (apiKey === 'YOUR_OPENWEATHERMAP_API_KEY' || apiKey === 'YOUR_API_KEY') {
             throw new Error('請設定 OpenWeatherMap API key');
         }
         

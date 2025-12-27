@@ -997,7 +997,7 @@ footer::before {
     font-weight: bold;
     box-shadow: 0 4px 15px rgba(0, 71, 160, 0.3);
     transition: all 0.3s ease;
-    z-index: 1000;
+    z-index: 999;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -1025,6 +1025,18 @@ footer::before {
         width: 45px;
         height: 45px;
         font-size: 1.3rem;
+    }
+
+    /* 移動版模態框樣式 - 避免被 header 遮擋 */
+    .schedule-modal {
+        align-items: flex-start !important;
+        padding-top: 80px !important;
+        overflow-y: auto !important;
+    }
+
+    .schedule-modal .modal-content {
+        margin-top: 0 !important;
+        max-height: calc(100vh - 100px) !important;
     }
 }
 
